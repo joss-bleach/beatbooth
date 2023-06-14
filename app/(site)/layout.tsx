@@ -3,6 +3,9 @@ import { Roboto } from "next/font/google";
 
 // Providers
 import SupabaseProvider from "@/providers/SupabaseProvider";
+import UserProvider from "@/providers/UserProvider";
+import ModalProvider from "@/providers/ModalProvider";
+import ToastProvider from "@/providers/ToastProvider";
 
 // Types
 import { Metadata } from "next";
@@ -28,8 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
+        <ToastProvider />
         <SupabaseProvider>
-          <Sidebar>{children}</Sidebar>
+          <UserProvider>
+            <ModalProvider />
+            <Sidebar>{children}</Sidebar>
+          </UserProvider>
         </SupabaseProvider>
       </body>
     </html>
