@@ -1,6 +1,9 @@
 import "../globals.css";
 import { Roboto } from "next/font/google";
 
+// Providers
+import SupabaseProvider from "@/providers/SupabaseProvider";
+
 // Types
 import { Metadata } from "next";
 
@@ -25,7 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <Sidebar>{children}</Sidebar>
+        <SupabaseProvider>
+          <Sidebar>{children}</Sidebar>
+        </SupabaseProvider>
       </body>
     </html>
   );
