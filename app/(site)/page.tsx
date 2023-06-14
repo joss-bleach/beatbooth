@@ -3,12 +3,17 @@
 // Hooks
 
 // Actions
+import getSongs from "@/actions/getSongs";
 
 // Components
 import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
+import PageContent from "./components/PageContent";
 
-const Home = () => {
+export const revalidate = 0;
+
+const Home = async () => {
+  const songs = await getSongs();
   return (
     <section className="bg-neutral-800 rounded-lg h-full w-full overflow-hidden overflow-y-auto">
       <Header>
@@ -27,7 +32,7 @@ const Home = () => {
         <div className="flex justify-between items-center">
           <h1 className="text-white text-2xl font-medium">New songs</h1>
         </div>
-        <div>List of songs</div>
+        <PageContent songs={songs} />
       </div>
     </section>
   );

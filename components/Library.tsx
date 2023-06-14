@@ -5,6 +5,9 @@ import { ListMusic, Plus } from "lucide-react";
 // Types
 
 // Hooks
+import useAuthModal from "@/hooks/useAuthModal";
+import { useUser } from "@/hooks/useUser";
+import useUploadModal from "@/hooks/useUploadModal";
 
 // Actions
 
@@ -13,9 +16,18 @@ import { ListMusic, Plus } from "lucide-react";
 interface LibraryProps {}
 
 const Library: FC<LibraryProps> = () => {
+  const authModal = useAuthModal();
+  const uploadModal = useUploadModal();
+  const { user } = useUser();
+
   const handleOnClick = () => {
-    // Handle upload
+    if (!user) {
+      return authModal.onOpen();
+    }
+    // Check for subscription
+    return uploadModal.onOpen();
   };
+
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between px-5 pt-4">
