@@ -23,7 +23,7 @@ const Home = async () => {
             <ListItem
               image="/images/liked.jpeg"
               name="Liked songs"
-              href="liked"
+              href="/liked"
             />
           </div>
         </div>
