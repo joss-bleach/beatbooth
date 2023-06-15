@@ -10,6 +10,9 @@ import ToastProvider from "@/providers/ToastProvider";
 // Types
 import { Metadata } from "next";
 
+// Actions
+import getSongsByUserId from "@/actions/getSongsByUserId";
+
 // Components
 import Sidebar from "@/components/Sidebar";
 
@@ -23,11 +26,14 @@ export const metadata: Metadata = {
   description: "Dive into a world of limitless melodies and curated playlists.",
 };
 
-export default function RootLayout({
+export const revalidate = 0;
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const userSongs = await getSongsByUserId();
   return (
     <html lang="en">
       <body className={roboto.className}>
@@ -35,7 +41,7 @@ export default function RootLayout({
         <SupabaseProvider>
           <UserProvider>
             <ModalProvider />
-            <Sidebar>{children}</Sidebar>
+            <Sidebar songs={userSongs}>{children}</Sidebar>
           </UserProvider>
         </SupabaseProvider>
       </body>

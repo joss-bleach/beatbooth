@@ -3,6 +3,7 @@ import { FC, ReactNode, useMemo } from "react";
 import { Home, Search } from "lucide-react";
 
 // Types
+import { Song } from "@/types";
 
 // Hooks
 import { usePathname } from "next/navigation";
@@ -16,9 +17,10 @@ import Library from "@/components/Library";
 
 interface SidebarProps {
   children: ReactNode;
+  songs: Song[];
 }
 
-const Sidebar: FC<SidebarProps> = ({ children }) => {
+const Sidebar: FC<SidebarProps> = ({ children, songs }) => {
   const pathname = usePathname();
   const routes = useMemo(
     () => [
@@ -48,7 +50,7 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
           </nav>
         </Box>
         <Box className="overflow-y-auto h-full">
-          <Library />
+          <Library songs={songs} />
         </Box>
       </aside>
       <main className="h-full flex-1 overflow-y-auto py-2">{children}</main>
